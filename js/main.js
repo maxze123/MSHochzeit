@@ -12,9 +12,13 @@
     video.style.display = "none";
   }
 
-  // Hide video if it can't play (common on mobile)
+  // Fade video in only once it's actually playing
+  video.addEventListener("playing", () => video.classList.add("playing"));
+
+  // Hide on any error
   video.addEventListener("error", showFallback);
 
+  // play() returns a Promise on modern browsers; rejection = autoplay blocked
   const playPromise = video.play();
   if (playPromise !== undefined) {
     playPromise.catch(showFallback);
