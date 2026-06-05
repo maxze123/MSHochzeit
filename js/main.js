@@ -3,6 +3,24 @@
    js/main.js — All interactive behaviour
 ═══════════════════════════════════════════════════════════════ */
 
+/* ── HERO VIDEO FALLBACK ─────────────────────────────────────── */
+(function initHeroVideo() {
+  const video = document.querySelector(".hero-video");
+  if (!video) return;
+
+  function showFallback() {
+    video.style.display = "none";
+  }
+
+  // Hide video if it can't play (common on mobile)
+  video.addEventListener("error", showFallback);
+
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(showFallback);
+  }
+})();
+
 /* ── NAV SCROLL BEHAVIOUR ───────────────────────────────────── */
 const navEl = document.getElementById("nav");
 window.addEventListener("scroll", () => {
