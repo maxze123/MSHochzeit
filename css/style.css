@@ -109,12 +109,6 @@ nav a:hover { opacity: 0.55; }
 }
 
 
-.hero::before {
-  content: '';
-  position: absolute; inset: 1.8rem;
-  border: 0.5px solid rgba(255,255,255,0.14);
-  pointer-events: none; z-index: 2;
-}
 
 .hero-content {
   position: relative; z-index: 2;
