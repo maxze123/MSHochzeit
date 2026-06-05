@@ -353,6 +353,52 @@ nav a:hover { opacity: 0.55; }
   opacity: 0.25;
 }
 
+/* ── SAVE THE DATE — CREAM BG ───────────────────────────────────── */
+.section-savethedate {
+  background: var(--cream);
+  padding: 6rem 2rem 5.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.std-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  color: var(--espresso-mid);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.std-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 300;
+  color: var(--espresso);
+  letter-spacing: 0.04em;
+  line-height: 1.85;
+  max-width: 540px;
+  margin-top: 2.2rem;
+}
+
+.std-body strong {
+  font-weight: 400;
+  color: var(--espresso);
+}
+
+.std-note {
+  font-size: 0.72rem;
+  font-weight: 200;
+  letter-spacing: 0.18em;
+  color: var(--espresso-lt);
+  margin-top: 2.6rem;
+  padding-top: 2rem;
+  border-top: 0.5px solid rgba(107,66,38,0.15);
+  width: 100%;
+  max-width: 380px;
+}
+
 /* ── ABLAUF — ESPRESSO BG ───────────────────────────────────────── */
 .section-ablauf {
   background: var(--espresso);
