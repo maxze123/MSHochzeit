@@ -370,7 +370,8 @@ nav a:hover { opacity: 0.55; }
 }
 
 .std-title {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Italianno', cursive;
+  font-weight: 400;
   font-size: clamp(3rem, 8vw, 5.5rem);
   color: var(--espresso-mid);
   line-height: 1;
@@ -397,7 +398,7 @@ nav a:hover { opacity: 0.55; }
   font-size: 0.72rem;
   font-weight: 200;
   letter-spacing: 0.18em;
-  color: var(--espresso-lt);
+  color: var(--espresso-mid);
   margin-top: 2.6rem;
   padding-top: 2rem;
   border-top: 0.5px solid rgba(107,66,38,0.15);
