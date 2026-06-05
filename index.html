@@ -3,360 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saskia & Maximilian · 3. Juni 2028</title>
+<title>Saskia &amp; Maximilian · 3. Juni 2028</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream:        #F5F0E8;
-    --espresso:     #3C2415;
-    --espresso-mid: #6B4226;
-    --espresso-lt:  #A0714F;
-    --white:        #FFFFFF;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--espresso);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ───────────────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    padding: 1.2rem 2rem;
-    transition: background 0.4s, backdrop-filter 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(245,240,232,0.94);
-    backdrop-filter: blur(10px);
-  }
-  nav a {
-    font-size: 0.6rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-  nav.scrolled a { color: var(--espresso); }
-  nav a:hover { opacity: 0.55; }
-
-  /* ── HERO — VIDEO ──────────────────────────────────────────── */
-  .hero {
-    position: relative;
-    width: 100%;
-    height: 100svh;
-    min-height: 560px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Video background */
-  .hero-video {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    z-index: 0;
-    filter: brightness(0.7) saturate(0.9);
-  }
-
-  /* Fallback gradient if no video */
-  .hero-video-fallback {
-    position: absolute; inset: 0;
-    background: linear-gradient(160deg, #4a3220 0%, #2a1a0e 40%, #1a0e06 100%);
-    z-index: 0;
-  }
-
-  /* Overlay — subtle darkening at top, stronger at center */
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background:
-      linear-gradient(to bottom,
-        rgba(20,10,4,0.28) 0%,
-        rgba(20,10,4,0.18) 35%,
-        rgba(20,10,4,0.22) 65%,
-        rgba(20,10,4,0.40) 100%
-      );
-    z-index: 1;
-  }
-
-  /* Corner frames */
-  .corner {
-    position: absolute; width: 48px; height: 48px;
-    opacity: 0.35; z-index: 3; pointer-events: none;
-  }
-  .corner svg { width: 100%; height: 100%; }
-  .corner.tl { top: 1.8rem; left: 1.8rem; }
-  .corner.tr { top: 1.8rem; right: 1.8rem; transform: scaleX(-1); }
-  .corner.bl { bottom: 1.8rem; left: 1.8rem; transform: scaleY(-1); }
-  .corner.br { bottom: 1.8rem; right: 1.8rem; transform: scale(-1); }
-
-  /* Thin border inset */
-  .hero::before {
-    content: '';
-    position: absolute; inset: 1.8rem;
-    border: 0.5px solid rgba(255,255,255,0.14);
-    pointer-events: none; z-index: 2;
-  }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0 2rem;
-  }
-
-  .eyebrow {
-    font-size: 0.58rem;
-    font-weight: 200;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.62);
-    margin-bottom: 1.4rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
-  }
-
-  .names {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(4rem, 12vw, 10rem);
-    color: var(--white);
-    line-height: 0.95;
-    text-shadow: 0 2px 48px rgba(0,0,0,0.3);
-    opacity: 0;
-    animation: fadeUp 1.3s cubic-bezier(.16,1,.3,1) 0.45s forwards;
-  }
-
-  .hero-rule {
-    width: 70px; height: 0.5px;
-    background: rgba(255,255,255,0.35);
-    margin: 1.8rem auto;
-    opacity: 0;
-    animation: fadeIn 1s ease 1s forwards;
-  }
-
-  .date-loc {
-    display: flex; flex-direction: column;
-    align-items: center; gap: 0.4rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 1.1s forwards;
-  }
-
-  .date-line {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(0.85rem, 1.8vw, 1.1rem);
-    font-weight: 300;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.88);
-  }
-
-  .loc-line {
-    font-size: 0.6rem;
-    font-weight: 200;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.52);
-  }
-
-  /* Scroll hint */
-  .scroll-hint {
-    position: absolute; bottom: 2.4rem; left: 50%;
-    transform: translateX(-50%);
-    display: flex; flex-direction: column;
-    align-items: center; gap: 0.4rem;
-    z-index: 3;
-    opacity: 0;
-    animation: fadeIn 1s ease 2s forwards;
-  }
-  .scroll-hint span {
-    font-size: 0.5rem; letter-spacing: 0.35em;
-    text-transform: uppercase; color: rgba(255,255,255,0.38);
-  }
-  .scroll-line {
-    width: 0.5px; height: 30px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.38), transparent);
-    animation: pulse 2s ease-in-out 2.5s infinite;
-  }
-
-  /* ── COUNTDOWN SECTION — ESPRESSO BG ───────────────────────── */
-  .section-countdown {
-    background: var(--espresso);
-    padding: 5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  .cd-eyebrow {
-    font-size: 0.58rem;
-    font-weight: 200;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--espresso-lt);
-    margin-bottom: 2.5rem;
-  }
-
-  .countdown {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .cd-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 90px;
-  }
-  .cd-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .cd-lbl {
-    font-size: 0.5rem;
-    font-weight: 200;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--espresso-lt);
-    margin-top: 0.5rem;
-  }
-  .cd-sep {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    color: var(--espresso-lt);
-    opacity: 0.4;
-    padding: 0 0.3rem;
-    line-height: 1;
-    margin-top: 0.15rem;
-  }
-
-  /* Thin rule below countdown */
-  .cd-rule {
-    width: 40px; height: 0.5px;
-    background: var(--espresso-lt);
-    opacity: 0.3;
-    margin: 3rem auto 0;
-  }
-
-  /* ── EMAIL SECTION — CREAM BG ──────────────────────────────── */
-  .section-email {
-    background: var(--cream);
-    padding: 5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .email-script {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    color: var(--espresso-mid);
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
-
-  .email-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    font-style: italic;
-    color: var(--espresso-lt);
-    letter-spacing: 0.08em;
-    text-align: center;
-    margin-bottom: 1.2rem;
-  }
-
-  .email-form {
-    display: flex;
-    align-items: center;
-    border-bottom: 0.5px solid var(--espresso-mid);
-    padding-bottom: 0.6rem;
-    gap: 1rem;
-    width: 100%;
-    max-width: 340px;
-  }
-  .email-form input {
-    flex: 1; background: transparent;
-    border: none; outline: none;
-    font-family: 'Jost', sans-serif;
-    font-weight: 200; font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    color: var(--espresso);
-    padding: 0.1rem 0;
-  }
-  .email-form input::placeholder {
-    color: var(--espresso-lt); opacity: 0.55;
-  }
-  .email-form button {
-    background: none; border: none; cursor: pointer;
-    font-family: 'Jost', sans-serif;
-    font-weight: 300; font-size: 0.6rem;
-    letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--espresso-mid);
-    transition: color 0.2s, letter-spacing 0.25s;
-    white-space: nowrap;
-  }
-  .email-form button:hover {
-    color: var(--espresso); letter-spacing: 0.34em;
-  }
-
-  .email-note {
-    font-size: 0.58rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--espresso-lt);
-    opacity: 0.45;
-    margin-top: 0.5rem;
-  }
-
-  /* ── Animations ─────────────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn { to { opacity: 1; } }
-  @keyframes pulse {
-    0%,100% { opacity: 0.25; } 50% { opacity: 0.65; }
-  }
-
-  /* ── Toast ───────────────────────────────────────────────────── */
-  .toast {
-    position: fixed; bottom: 2rem; left: 50%;
-    transform: translateX(-50%) translateY(12px);
-    background: var(--espresso); color: var(--cream);
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem; font-weight: 200;
-    letter-spacing: 0.2em;
-    padding: 0.7rem 1.8rem;
-    opacity: 0; pointer-events: none; z-index: 1000;
-    transition: all 0.35s cubic-bezier(.16,1,.3,1);
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Nav -->
+<!-- ═══ NAV ════════════════════════════════════════════════════ -->
 <nav id="nav">
   <a href="#ablauf">Ablauf</a>
   <a href="#unterkuenfte">Unterkünfte</a>
@@ -367,9 +20,10 @@
 <!-- ═══ HERO — VIDEO ═══════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-  <!-- Video — ersetze src mit eurem Video auf dem Server: /video/hero.mp4 -->
-  <!-- Empfehlung: pexels.com/search/videos/tuscany → kostenlos herunterladen -->
+  <!-- Fallback gradient shown while/if video is absent -->
   <div class="hero-video-fallback"></div>
+
+  <!-- Replace /video/hero.mp4 with your own file (free on pexels.com/search/videos/lake-garda) -->
   <video
     class="hero-video"
     autoplay muted loop playsinline
@@ -377,7 +31,6 @@
     onerror="this.style.display='none'"
   >
     <source src="/video/hero.mp4" type="video/mp4">
-    <!-- Fallback: einfach .webm auch anbieten falls vorhanden -->
   </video>
 
   <div class="hero-overlay"></div>
@@ -402,6 +55,7 @@
     <span>Mehr</span>
     <div class="scroll-line"></div>
   </div>
+
 </section>
 
 <!-- ═══ COUNTDOWN — ESPRESSO ════════════════════════════════════ -->
@@ -434,7 +88,7 @@
 <!-- ═══ EMAIL — CREAM ════════════════════════════════════════════ -->
 <section class="section-email" id="updates">
   <p class="email-script">auf dem Laufenden bleiben</p>
-  <p class="email-sub">Updates & Informationen direkt in euer Postfach</p>
+  <p class="email-sub">Updates &amp; Informationen direkt in euer Postfach</p>
   <div class="email-form">
     <input type="email" id="emailInput" placeholder="eure@email.de" autocomplete="off">
     <button onclick="subscribe()">Eintragen</button>
@@ -442,40 +96,276 @@
   <p class="email-note">Kein Spam · Nur das Wichtigste</p>
 </section>
 
-<div class="toast" id="toast">Danke — wir melden uns bald ✦</div>
+<!-- ═══ ABLAUF — ESPRESSO ════════════════════════════════════════ -->
+<section class="section-ablauf" id="ablauf">
 
-<script>
-// Nav scroll
-const navEl = document.getElementById("nav");
-window.addEventListener("scroll", () => {
-  navEl.classList.toggle("scrolled", window.scrollY > 60);
-}, { passive: true });
+  <p class="section-eyebrow section-eyebrow--light reveal">Der große Tag</p>
+  <h2 class="ablauf-title reveal">Ablauf · 3. Juni 2028</h2>
+  <div class="section-rule section-rule--light reveal"></div>
 
-// Countdown
-const wedding = new Date("2028-06-03T14:00:00");
-function pad(n) { return String(n).padStart(2, "0"); }
-function tick() {
-  const diff = wedding - new Date();
-  if (diff <= 0) return;
-  document.getElementById("cd-days").textContent  = pad(Math.floor(diff / 86400000));
-  document.getElementById("cd-hours").textContent = pad(Math.floor((diff % 86400000) / 3600000));
-  document.getElementById("cd-mins").textContent  = pad(Math.floor((diff % 3600000) / 60000));
-  document.getElementById("cd-secs").textContent  = pad(Math.floor((diff % 60000) / 1000));
-}
-tick(); setInterval(tick, 1000);
+  <div class="timeline reveal-group">
 
-// Subscribe
-function subscribe() {
-  const val = document.getElementById("emailInput").value.trim();
-  if (!val || !val.includes("@")) return;
-  const t = document.getElementById("toast");
-  t.classList.add("show");
-  document.getElementById("emailInput").value = "";
-  setTimeout(() => t.classList.remove("show"), 3000);
-}
-document.getElementById("emailInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") subscribe();
-});
-</script>
+    <div class="timeline-item reveal">
+      <div class="timeline-time">13:30</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-desc">Empfang der Gäste</div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-time">14:00</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-desc">Standesamtliche Trauung</div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-time">15:00</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-desc">Sektempfang &amp; Canapés</div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-time">17:00</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-desc">Abendessen</div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-time">19:30</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-desc">Reden &amp; Überraschungen</div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-time">21:00</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-desc">Tanz in die Nacht</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ═══ UNTERKÜNFTE — CREAM ══════════════════════════════════════ -->
+<section class="section-unterkunfte" id="unterkuenfte">
+
+  <p class="section-eyebrow section-eyebrow--dark reveal">Wo schläft ihr?</p>
+  <h2 class="unterkunfte-title reveal">Empfohlene Unterkünfte</h2>
+  <p class="unterkunfte-sub reveal">Alle Hotels liegen in 10–20 Minuten Entfernung von der Festlocation</p>
+
+  <div class="hotel-grid reveal-group">
+
+    <!-- Hotel 1 -->
+    <div class="hotel-card reveal">
+      <div class="hotel-stars">★★★★</div>
+      <div class="hotel-name">Hotel Bellavista</div>
+      <div class="hotel-location">Riva del Garda</div>
+      <div class="hotel-price">Doppelzimmer ab €180 / Nacht</div>
+      <div class="hotel-tip">Unser Tipp: ruhige Lage, Seeblick und großzügige Terrasse direkt am Wasser.</div>
+      <div class="hotel-code">Buchungscode: <span>SASKIA28</span></div>
+    </div>
+
+    <!-- Hotel 2 -->
+    <div class="hotel-card reveal">
+      <div class="hotel-stars">★★★</div>
+      <div class="hotel-name">Villa Riva</div>
+      <div class="hotel-location">Riva del Garda</div>
+      <div class="hotel-price">Doppelzimmer ab €120 / Nacht</div>
+      <div class="hotel-tip">Familiär &amp; herzlich — kurzer Fußweg ins Zentrum und zur Location.</div>
+      <div class="hotel-code">Buchungscode: <span>MAXI28</span></div>
+    </div>
+
+    <!-- Hotel 3 -->
+    <div class="hotel-card reveal">
+      <div class="hotel-stars">★★★</div>
+      <div class="hotel-name">Agriturismo Le Vigne</div>
+      <div class="hotel-location">Arco</div>
+      <div class="hotel-price">Doppelzimmer ab €90 / Nacht</div>
+      <div class="hotel-tip">Idyllisch im Weinberg gelegen, ca. 15 Minuten mit dem Auto zur Festlocation.</div>
+    </div>
+
+  </div>
+
+  <div class="shuttle-note reveal">
+    ✦ &nbsp; Ein Shuttle-Service verkehrt am Abend zwischen den empfohlenen Hotels und der Festlocation — bitte bei der RSVP-Anmeldung angeben, ob ihr diesen nutzen möchtet.
+  </div>
+
+</section>
+
+<!-- ═══ FAQ — ESPRESSO ══════════════════════════════════════════ -->
+<section class="section-faq" id="faq">
+
+  <p class="section-eyebrow section-eyebrow--light reveal">Fragen &amp; Antworten</p>
+  <h2 class="faq-title reveal">Häufige Fragen</h2>
+  <div class="section-rule section-rule--light reveal"></div>
+
+  <div class="faq-list reveal">
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Was soll ich anziehen?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Wir wünschen uns elegante Sommerkleidung — Herren in Sakko oder Anzug, Damen im festlichen Sommerkleid. Farbe Weiß bitte der Braut überlassen.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Gibt es einen Dresscode?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Garden Formal / Elegant Casual. Stilvolle Sommerlooks sind herzlich willkommen — Hauptsache, ihr fühlt euch wohl und seht wunderschön aus.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Wo parke ich?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Direkt an der Location stehen kostenlose Parkplätze zur Verfügung. Außerdem fahren Shuttles von den empfohlenen Hotels — einfach bei der Anmeldung angeben.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Können wir Kinder mitbringen?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Wir feiern diese Nacht als Erwachsenenfeier. Für Kinder unter 10 Jahren bitten wir herzlich um Rücksprache, damit wir gemeinsam eine gute Lösung finden.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Gibt es vegetarische / vegane Optionen?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Selbstverständlich! Bitte gebt euren Menüwunsch im RSVP-Formular an — wir bieten Fleisch, Vegetarisch, Vegan und eine glutenfreie Option.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Wann ist die RSVP-Frist?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Bitte sagt bis zum 1. März 2028 verbindlich zu oder ab, damit wir gut planen können. Wir freuen uns sehr über eine frühe Rückmeldung!
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <span class="faq-q-text">Wo kann ich Geschenke hinterlegen?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </div>
+      <div class="faq-answer" role="region">
+        <div class="faq-answer-inner">
+          Eure Anwesenheit ist das schönste Geschenk, das wir uns wünschen. Falls ihr dennoch etwas geben möchtet, freuen wir uns sehr über einen Beitrag zur Hochzeitsreise.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ═══ RSVP — CREAM ════════════════════════════════════════════ -->
+<section class="section-rsvp" id="rsvp">
+
+  <p class="section-eyebrow section-eyebrow--dark reveal">Rückmeldung</p>
+  <h2 class="rsvp-title reveal">Seid ihr dabei?</h2>
+  <p class="rsvp-sub reveal">Bitte antwortet bis zum 1. März 2028</p>
+
+  <form class="rsvp-form reveal" id="rsvpForm" novalidate>
+
+    <!-- Namen -->
+    <div class="form-field">
+      <label class="form-label" for="rsvpName">Namen</label>
+      <input
+        class="form-input"
+        type="text"
+        id="rsvpName"
+        name="name"
+        placeholder="Vor- und Nachname"
+        autocomplete="name"
+        required
+      >
+    </div>
+
+    <!-- Anwesenheit -->
+    <div class="form-field">
+      <span class="form-label">Anwesenheit</span>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="anwesenheit" value="ja" required>
+          Ja, ich / wir freuen uns!
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="anwesenheit" value="nein">
+          Leider können wir nicht kommen
+        </label>
+      </div>
+    </div>
+
+    <!-- Menüwunsch -->
+    <div class="form-field">
+      <label class="form-label" for="rsvpMenu">Menüwunsch</label>
+      <select class="form-select" id="rsvpMenu" name="menu">
+        <option value="" disabled selected>Bitte wählen …</option>
+        <option value="fleisch">Fleisch</option>
+        <option value="vegetarisch">Vegetarisch</option>
+        <option value="vegan">Vegan</option>
+        <option value="glutenfrei">Glutenfrei</option>
+      </select>
+    </div>
+
+    <!-- Nachricht -->
+    <div class="form-field">
+      <label class="form-label" for="rsvpNote">Nachricht <em style="font-style:normal;opacity:0.5">(optional)</em></label>
+      <textarea
+        class="form-textarea"
+        id="rsvpNote"
+        name="nachricht"
+        placeholder="Eine Nachricht an uns …"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit">Absenden</button>
+
+  </form>
+
+</section>
+
+<!-- ═══ FOOTER — ESPRESSO ═══════════════════════════════════════ -->
+<footer>
+  <p class="footer-names">Saskia &amp; Maximilian</p>
+  <p class="footer-date">3. Juni 2028 · Lago di Garda</p>
+  <div class="footer-rule"></div>
+  <p class="footer-credit">Mit Liebe gestaltet · © 2028</p>
+</footer>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>
