@@ -5,7 +5,7 @@ Statische Hochzeitswebsite für Saskia & Maximilian, Hochzeit am **3. Juni 2028*
 
 ## Technologie
 - Plain HTML5 / CSS3 / Vanilla JS (keine Build-Tools, keine Frameworks)
-- Fonts via Google Fonts: Cormorant Garamond, Great Vibes, Jost
+- Fonts via Google Fonts: Cormorant Garamond, Italianno, Jost
 - Deployment: statischer Hosting-Provider (z.B. Netlify, Vercel, GitHub Pages)
 
 ## Dateistruktur
@@ -42,7 +42,7 @@ MSHochzeit/
 - `--espresso-lt: #A0714F` — Heller Akzent, Labels, Dekolinien
 
 ### Typografie
-- **Great Vibes** — Schreibschrift-Akzente (Sektions-Titles, Footer-Namen)
+- **Italianno** — Schreibschrift-Akzente (Sektions-Titles, Footer-Namen)
 - **Cormorant Garamond** — Elegante Serifenschrift (Timeline-Zeiten, Karten-Namen, Akkordeon-Fragen)
 - **Jost 200–300** — Fließtext, Labels, Formulare
 

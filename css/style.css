@@ -230,6 +230,7 @@ nav a:hover { opacity: 0.55; }
   color: var(--cream);
   line-height: 1;
   letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 .cd-lbl {
   font-size: 0.5rem;
@@ -267,7 +268,7 @@ nav a:hover { opacity: 0.55; }
 }
 
 .email-script {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Italianno', cursive;
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   color: var(--espresso-mid);
   line-height: 1;
@@ -514,7 +515,7 @@ nav a:hover { opacity: 0.55; }
 }
 
 .unterkunfte-title {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Italianno', cursive;
   font-size: clamp(2rem, 5vw, 3.4rem);
   color: var(--espresso-mid);
   line-height: 1.1;
@@ -754,7 +755,7 @@ nav a:hover { opacity: 0.55; }
 }
 
 .rsvp-title {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Italianno', cursive;
   font-size: clamp(2rem, 5vw, 3.4rem);
   color: var(--espresso-mid);
   line-height: 1.1;
@@ -918,7 +919,7 @@ footer {
 }
 
 .footer-names {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Italianno', cursive;
   font-size: clamp(2.2rem, 5vw, 3.8rem);
   color: var(--cream);
   line-height: 1.1;
